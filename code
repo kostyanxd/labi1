@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Polynomial Factorization</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Polynomial Factorization</h1>
+    <input type="text" id="polynomial" placeholder="Enter the polynomial">
+    <button id="factorize">Factorize</button>
+    <p id="response"></p>
+  </div>
+
+  <script>
+    const factorizeButton = document.querySelector('#factorize');
+    const polynomialInput = document.querySelector('#polynomial');
+    const responseDiv = document.querySelector('#response');
+
+    factorizeButton.addEventListener('click', () => {
+      const polynomial = polynomialInput.value;
+      const apiUrl = `https://newton.vercel.app/api/v2/factor/${polynomial}`;
+
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          responseDiv.textContent = data.result;
+        })
+    });
+  </script>
+   <style>
+    .container {
+      width: 50%;
+      margin: 50px auto;
+      text-align: center;
+    }
+    input[type="text"] {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      border-radius: 5px;
+      border: 1px solid gray;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      border-radius: 5px;
+      border: 1px solid gray;
+      background-color: lightblue;
+      cursor: pointer;
+    }
+    #response {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+  </style>
+</body>
+</html>
